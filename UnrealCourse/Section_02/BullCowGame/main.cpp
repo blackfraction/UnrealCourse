@@ -11,11 +11,12 @@ bool AskToPlayAgain();
 // application entry proint
 int main()
 {
-	PrintIntro();
-	PlayGame();
-	AskToPlayAgain();
-	// exit application
-	return 0;
+	do
+	{
+		PrintIntro();
+		PlayGame();
+	}
+	while (AskToPlayAgain() == true); // if false, exit application
 }
 
 
