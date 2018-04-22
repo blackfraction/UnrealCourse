@@ -1,4 +1,6 @@
 #include "FBullCowGame.h"
+#include <map>
+#define TMAP std::map
 
 using int32 = int;
 
@@ -10,7 +12,7 @@ FBullCowGame::FBullCowGame()
 int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
-bool FBullCowGame::IsGameWon() const { return false; }
+bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
 void FBullCowGame::Reset() 
 {
@@ -20,19 +22,20 @@ void FBullCowGame::Reset()
 	MyMaxTries = MAX_TRIES;
 	MyHiddenWord = HIDDEN_WORD;
 	MyCurrentTry = 1;
+	bGameIsWon = false;
 
 	return; 
 }
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 {
-	if (false) // if guess isn't an isogram
+	if (!IsIsogram(Guess)) // if guess isn't an isogram
 	{
-		return EGuessStatus::Not_Isogram;
+		return EGuessStatus::Not_Isogram; // TOTO write function
 	}
 	else if (false) // if the guess isn't all lowercase
 	{
-		return EGuessStatus::Not_Lowercase;
+		return EGuessStatus::Not_Lowercase; // TOTO write function
 	}
 	else if (Guess.length() != GetHiddenWordLength()) // if guess length is wrong
 	{
@@ -45,20 +48,17 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 }
 
 // receives a VALID guess, increments  turn, and returns count
-FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
+FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 {
-	// increment the turn number
 	MyCurrentTry++;
-
-	// setup a return variable
 	FBullCowCount BullCowCount;
+	int32 WordLength = MyHiddenWord.length(); // assuming same length as guess
 
-	// loop through all letters in the guess
-	int32 HiddenWordLength = MyHiddenWord.length();
-	for (int32 MHWChar = 0; MHWChar < HiddenWordLength; MHWChar++)
+	// loop through all letters in the hidden word
+	for (int32 MHWChar = 0; MHWChar < WordLength; MHWChar++)
 	{
-		// compare letters against the hidden word
-		for (int32 GChar = 0; GChar < HiddenWordLength; GChar++) // compares letters against the hidden word
+		// compare letters against the guess
+		for (int32 GChar = 0; GChar < WordLength; GChar++) // compares letters against the hidden word
 		{
 			// if they match then
 			if (Guess[GChar] == MyHiddenWord[MHWChar])
@@ -74,6 +74,34 @@ FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
 			}
 		}
 	}
-
+	if (BullCowCount.Bulls == WordLength)
+	{
+		bGameIsWon = true;
+	}
+	else
+	{
+		bGameIsWon = false;
+	}
 	return BullCowCount;
+}
+
+bool FBullCowGame::IsIsogram(FString Guess) const
+{
+	// treat 0 and 1 letter words as isograms
+	if (Guess.length() <= 1) { return true; }
+
+	TMAP<char, bool> LetterRead; // set up the map
+	for (auto Letter : Guess) // for all letters of the word
+	{
+		Letter = tolower(Letter); // handle mixed case
+		if (LetterRead[Letter])	// if a letter is in the map
+		{
+			return false; // we do not have an isogram
+		}
+		else
+		{
+			LetterRead[Letter] = true; // add the letter to the map
+		}
+	}
+	return true; // in cases were /0 is entered
 }
