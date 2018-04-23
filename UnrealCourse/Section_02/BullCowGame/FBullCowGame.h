@@ -26,8 +26,11 @@ public:
 	FBullCowGame(); // constructor
 
 	int32 GetMaxTries() const;
+	int32 GetDifficulty() const;
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
+	
+	void SetDifficulty(int32) const;
 
 	bool IsGameWon() const;
 	EGuessStatus CheckGuessValidity(FString) const;
@@ -36,15 +39,13 @@ public:
 
 	// counts bulls and cows and increases try number assuming valid guess.
 	FBullCowCount SubmitValidGuess(FString);
+	
 
 
-
-
-// Please try and ignore this and focus on the interface above
 private:
 	// see constructor for initialisation
+	int32 MyDifficulty;
 	int32 MyCurrentTry;
-	int32 MyMaxTries;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 	

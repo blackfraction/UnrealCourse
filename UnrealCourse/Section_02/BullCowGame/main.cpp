@@ -5,6 +5,7 @@ user interaction. For game logic see the FBullCowGame class.
 
 #include <iostream>
 #include <string>
+#include <limits>
 #include "FBullCowGame.h"
 
 using FText = std::string;
@@ -13,6 +14,7 @@ using int32 = int;
 void PrintIntro();
 void PrintOutro();
 void PlayGame();
+void AskForDifficulty();
 FText GetValidGuess();
 bool AskToPlayAgain();
 
@@ -34,6 +36,23 @@ int main()
 void PrintIntro()
 {
 	// print out introduction
+	std::cout << "MM                   MM                                     \n";
+	std::cout << "MMM+                8MM                                     \n";
+	std::cout << "MMMMMM            :MMM                        MM,     ZMM   \n";
+	std::cout << "ZMMM+MMMM+       MMMM                         MMMO  MMMMM   \n";
+	std::cout << "   MMM  MMMMMMMMMMMN                            MMMMMMMZ    \n";
+	std::cout << "    MMMMM   MMMMMMMMM                        ZMMMZMZ, MMMMMM\n";
+	std::cout << "      $MMD  MMM    MMMMMMM         MMMMMMMMMMMMM         MMM\n";
+	std::cout << "777MMMMDI               I7MMM~  7MMMIIIIIII+                \n";
+	std::cout << "MMM?                       MMM +MM                          \n";
+	std::cout << "                           ZMM +M+                          \n";
+	std::cout << "        B U L L S          MMM  MM            C O W S       \n";
+	std::cout << "                     MMMMMMMO    MMMMMMM                    \n";
+	std::cout << "               ZMMMMMMMM               MMMMM                \n";
+	std::cout << "             MMMM                         MMMMM             \n";
+	std::cout << "            MMM                               MMMMM         \n";
+	std::cout << "           MMO                                   MM,        \n";
+	std::cout << std::endl;
 	std::cout << "\n\nWelcome to Bulls and Cows, a fun word game." << std::endl;
 	std::cout << "An isogram is a word which contains each letter exactly once." << std::endl;
 	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of?" << std::endl;
@@ -44,8 +63,9 @@ void PrintIntro()
 void PlayGame()
 {
 	BCGame.Reset();
+	AskForDifficulty();
 	int32 MaxTries = BCGame.GetMaxTries();
-
+	
 	// loop asking for guesses while the game is NOT won and there are still tries remaining
 	while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries)
 	{
@@ -70,37 +90,46 @@ FText GetValidGuess()
 	{
 		// get a guess from the player
 		int32 CurrentTry = BCGame.GetCurrentTry();
-		std::cout << "Try " << CurrentTry << " - Please take a guess: ";
+		std::cout << "Try " << CurrentTry << " of " << BCGame.GetMaxTries() << " - Please take a guess: ";
 		std::getline(std::cin, Guess);
 
 		Status = BCGame.CheckGuessValidity(Guess);
 		switch (Status)
 		{
 		case EGuessStatus::Not_Alphabetic:
-			std::cout << "Please use only alphabetic characters!\n";
+			std::cout << "Please use only alphabetic characters!\n\n";
 			break;
 		case EGuessStatus::Not_Lowercase:
-			std::cout << "Please enter your guess in lowercase!\n";
+			std::cout << "Please enter your guess in lowercase!\n\n";
 			break;
 		case EGuessStatus::Not_Isogram:
-			std::cout << "Your guess i not an isogram!\n";
+			std::cout << "Your guess i not an isogram!\n\n";
 			break;
 		case EGuessStatus::Wrong_Length:
-			std::cout << "Your guess is not a " << BCGame.GetHiddenWordLength() << " letter word!\n";
+			std::cout << "Your guess is not a " << BCGame.GetHiddenWordLength() << " letter word!\n\n";
 			break;
 		default:
 			// assume the guess is valid
 			break;
 		}
-		std::cout << std::endl;
 	}
 	while (Status != EGuessStatus::OK); // keep looping until we get no errors
 	return Guess;
 }
 
+void AskForDifficulty()
+{
+	std::cout << "What is your preferred difficulty setting? (1-3)\n\n";
+	int32 Difficulty = 0;
+	std::cin >> Difficulty;
+	std::cin.ignore(INT_MAX, '\n');
+	std::cout << std::endl;
+	BCGame.SetDifficulty(Difficulty);
+}
+
 bool AskToPlayAgain()
 {
-	std::cout << "Do you want to play again with the same hidden word? (y/n) ";
+	std::cout << "Do you want to play again with the same hidden word? (y/n)\n\n";
 	FText Response = "";
 	std::getline(std::cin, Response);
 	return (Response[0] == 'y') || (Response[0] == 'Y');
