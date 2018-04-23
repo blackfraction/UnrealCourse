@@ -76,11 +76,14 @@ FText GetValidGuess()
 		Status = BCGame.CheckGuessValidity(Guess);
 		switch (Status)
 		{
-		case EGuessStatus::Not_Isogram:
-			std::cout << "Your guess i not an isogram!\n";
+		case EGuessStatus::Not_Alphabetic:
+			std::cout << "Please use only alphabetic characters!\n";
 			break;
 		case EGuessStatus::Not_Lowercase:
 			std::cout << "Please enter your guess in lowercase!\n";
+			break;
+		case EGuessStatus::Not_Isogram:
+			std::cout << "Your guess i not an isogram!\n";
 			break;
 		case EGuessStatus::Wrong_Length:
 			std::cout << "Your guess is not a " << BCGame.GetHiddenWordLength() << " letter word!\n";

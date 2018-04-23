@@ -16,7 +16,7 @@ bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
 void FBullCowGame::Reset() 
 {
-	constexpr int32 MAX_TRIES = 8;
+	constexpr int32 MAX_TRIES = 3;
 	const FString HIDDEN_WORD = "planet";
 
 	MyMaxTries = MAX_TRIES;
@@ -29,13 +29,17 @@ void FBullCowGame::Reset()
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 {
-	if (!IsIsogram(Guess)) // if guess isn't an isogram
+	if (!IsAlpha(Guess)) // if guess isn't an isogram
 	{
-		return EGuessStatus::Not_Isogram; // TOTO write function
+		return EGuessStatus::Not_Alphabetic;
 	}
-	else if (false) // if the guess isn't all lowercase
+	else if (!IsLowercase(Guess)) // if the guess isn't all lowercase
 	{
-		return EGuessStatus::Not_Lowercase; // TOTO write function
+		return EGuessStatus::Not_Lowercase;
+	}
+	else if (!IsIsogram(Guess)) // if guess isn't an isogram
+	{
+		return EGuessStatus::Not_Isogram;
 	}
 	else if (Guess.length() != GetHiddenWordLength()) // if guess length is wrong
 	{
@@ -85,6 +89,18 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 	return BullCowCount;
 }
 
+bool FBullCowGame::IsAlpha(FString Guess) const
+{
+	for (auto Letter : Guess) // for all letters of the word
+	{
+		if (!isalpha(Letter)) // if not a alphabetical letter
+		{
+			return false;
+		}
+	}
+	return true; // in case \0 is entered
+}
+
 bool FBullCowGame::IsIsogram(FString Guess) const
 {
 	// treat 0 and 1 letter words as isograms
@@ -103,5 +119,17 @@ bool FBullCowGame::IsIsogram(FString Guess) const
 			LetterRead[Letter] = true; // add the letter to the map
 		}
 	}
-	return true; // in cases were /0 is entered
+	return true; // in cases were \0 is entered
+}
+
+bool FBullCowGame::IsLowercase(FString Guess) const
+{
+	for (auto Letter : Guess) // for all letters of the word
+	{
+			if (!islower(Letter)) // if not a lowercase letter
+			{
+				return false;
+			}
+	}
+	return true; // in case \0 is entered
 }

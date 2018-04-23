@@ -14,6 +14,7 @@ enum class EGuessStatus
 {
 	Invalid_Status,
 	OK,
+	Not_Alphabetic,
 	Not_Isogram,
 	Wrong_Length,
 	Not_Lowercase
@@ -47,5 +48,7 @@ private:
 	FString MyHiddenWord;
 	bool bGameIsWon;
 	
+	bool IsAlpha(FString) const;
 	bool IsIsogram(FString) const;
+	bool IsLowercase(FString) const;
 };
