@@ -10,16 +10,16 @@ int32 FBullCowGame::GetDifficulty() const { return MyDifficulty; }
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
 
-void FBullCowGame::SetDifficulty(int32 Difficulty) const
+void FBullCowGame::SetDifficulty(int32 Difficulty)
 {
-	Difficulty = MyDifficulty;
+	MyDifficulty = Difficulty;
 }
 
 bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
 int32 FBullCowGame::GetMaxTries() const
 {
-	TMAP<int32, int32> WordLengthToMaxTries{ {3,4}, {4,5}, {5,5}, {6,5}, {7,6} };
+	TMAP<int32, int32> WordLengthToMaxTries{ {3,(4-MyDifficulty)}, {4,(6 - MyDifficulty)}, {5,(7 - MyDifficulty)}, {6,(8 - MyDifficulty)}, {7,(9 - MyDifficulty)} };
 	return WordLengthToMaxTries[MyHiddenWord.length()];
 }
 
@@ -138,3 +138,4 @@ bool FBullCowGame::IsLowercase(FString Guess) const
 	}
 	return true; // in case \0 is entered
 }
+

@@ -119,12 +119,17 @@ FText GetValidGuess()
 
 void AskForDifficulty()
 {
-	std::cout << "What is your preferred difficulty setting? (1-3)\n\n";
 	int32 Difficulty = 0;
-	std::cin >> Difficulty;
-	std::cin.ignore(INT_MAX, '\n');
-	std::cout << std::endl;
+	std::cout << "What is your preferred difficulty setting? (0-3, higher numbers equals less maximum tries.)\n\n";
+	while (!(std::cin >> Difficulty))
+	{
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n'); // reset iostream buffer
+			std::cout << "\nPlease enter a valid Difficulty!\n\n";
+	}
 	BCGame.SetDifficulty(Difficulty);
+	std::cin.ignore(INT_MAX, '\n'); // reset iostream buffer
+	std::cout << std::endl;
 }
 
 bool AskToPlayAgain()

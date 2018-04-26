@@ -30,7 +30,7 @@ public:
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
 	
-	void SetDifficulty(int32) const;
+	void SetDifficulty(int32);
 
 	bool IsGameWon() const;
 	EGuessStatus CheckGuessValidity(FString) const;
@@ -44,12 +44,12 @@ public:
 
 private:
 	// see constructor for initialisation
-	int32 MyDifficulty;
 	int32 MyCurrentTry;
+	int32 MyDifficulty;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 	
 	bool IsAlpha(FString) const;
 	bool IsIsogram(FString) const;
-	bool IsLowercase(FString) const;
+	bool IsLowercase(FString) const;	
 };
