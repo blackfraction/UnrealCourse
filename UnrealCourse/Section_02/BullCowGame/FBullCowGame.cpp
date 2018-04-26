@@ -1,18 +1,53 @@
+/*
+The game i s a simple guess the word game based on Mastermind.
+This file contains the actual game logic and the default constructor for the main game instance.
+No view code or direct user interaction.
+*/
+
+#pragma once
+
 #include "FBullCowGame.h"
 #include <map>
-#define TMAP std::map
 
+// to make syntax Unreal friendly
+#define TMAP std::map
 using int32 = int;
 
-FBullCowGame::FBullCowGame() { Reset(); } // default constructor
+FBullCowGame::FBullCowGame() { Reset(); } // constructor
 
 int32 FBullCowGame::GetDifficulty() const { return MyDifficulty; }
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
-int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
+int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWordLength; }
 
 void FBullCowGame::SetDifficulty(int32 Difficulty)
 {
 	MyDifficulty = Difficulty;
+}
+
+void FBullCowGame::SetHiddenWordLength(int32 HiddenWordLength)
+{
+	MyHiddenWordLength = HiddenWordLength;
+
+	if (MyHiddenWordLength == 3)
+	{
+		MyHiddenWord = "pet";
+	}
+	else if (MyHiddenWordLength == 4)
+	{
+		MyHiddenWord = "link";
+	}
+	else if (MyHiddenWordLength == 5)
+	{
+		MyHiddenWord = "heart";
+	}
+	else if (MyHiddenWordLength == 6)
+	{
+		MyHiddenWord = "planet";
+	}
+	else if (MyHiddenWordLength == 7)
+	{
+		MyHiddenWord = "stumped";
+	}
 }
 
 bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
@@ -25,7 +60,7 @@ int32 FBullCowGame::GetMaxTries() const
 
 void FBullCowGame::Reset() 
 {
-	const FString HIDDEN_WORD = "planet";
+	const FString HIDDEN_WORD = ""; // this MUST be an isogram
 	MyHiddenWord = HIDDEN_WORD;
 	MyCurrentTry = 1;
 	bGameIsWon = false;
@@ -138,4 +173,3 @@ bool FBullCowGame::IsLowercase(FString Guess) const
 	}
 	return true; // in case \0 is entered
 }
-

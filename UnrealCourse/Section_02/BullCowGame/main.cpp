@@ -1,24 +1,31 @@
-/* This is the console executable, that makes use of the BullCow class.
+/*
+This is the console executable, that makes use of the BullCow class.
 This acts as the view in a MVC pattern, and is responsible for all
 user interaction. For game logic see the FBullCowGame class.
 */
+
+#pragma once
 
 #include <iostream>
 #include <string>
 #include <limits>
 #include "FBullCowGame.h"
 
+// to make syntax Unreal friendly
 using FText = std::string;
 using int32 = int;
 
+// function prototypes as outside a class
 void PrintIntro();
 void PrintOutro();
 void PlayGame();
 void AskForDifficulty();
+void AskForHiddenWordLength();
 FText GetValidGuess();
 bool AskToPlayAgain();
+void ResetIOBuffer();
 
-// instantiate a new game
+// instantiate a new game, which we re-use across plays
 FBullCowGame BCGame;
 
 // application entry point
@@ -29,13 +36,12 @@ int main()
 		PrintIntro();
 		PlayGame();
 	}
-	while (AskToPlayAgain() == true); // if false, exit application
+	while (AskToPlayAgain() == true); // exit application
 }
 
 
 void PrintIntro()
 {
-	// print out introduction
 	std::cout << "MM                   MM                                     \n";
 	std::cout << "MMM+                8MM                                     \n";
 	std::cout << "MMMMMM            :MMM                        MM,     ZMM   \n";
@@ -60,12 +66,15 @@ void PrintIntro()
 	return;
 }
 
+
+// Plays a single round to completion
 void PlayGame()
 {
 	BCGame.Reset();
+	AskForHiddenWordLength();
 	AskForDifficulty();
 	int32 MaxTries = BCGame.GetMaxTries();
-	
+		
 	// loop asking for guesses while the game is NOT won and there are still tries remaining
 	while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries)
 	{
@@ -93,6 +102,7 @@ FText GetValidGuess()
 		std::cout << "Try " << CurrentTry << " of " << BCGame.GetMaxTries() << " - Please take a guess: ";
 		std::getline(std::cin, Guess);
 
+		// get a guess from the player
 		Status = BCGame.CheckGuessValidity(Guess);
 		switch (Status)
 		{
@@ -113,7 +123,7 @@ FText GetValidGuess()
 			break;
 		}
 	}
-	while (Status != EGuessStatus::OK); // keep looping until we get no errors
+	while (Status != EGuessStatus::OK); // keep looping until no errors received
 	return Guess;
 }
 
@@ -124,17 +134,28 @@ void AskForDifficulty()
 	while (!(std::cin >> Difficulty))
 	{
 			std::cin.clear();
-			std::cin.ignore(INT_MAX, '\n'); // reset iostream buffer
-			std::cout << "\nPlease enter a valid Difficulty!\n\n";
+			ResetIOBuffer();
 	}
 	BCGame.SetDifficulty(Difficulty);
-	std::cin.ignore(INT_MAX, '\n'); // reset iostream buffer
-	std::cout << std::endl;
+	ResetIOBuffer();
+}
+
+void AskForHiddenWordLength()
+{
+	int32 HiddenWordLength = 0;
+	std::cout << "What is your preferred word length? (3 to 7 letters)\n\n";
+	while (!(std::cin >> HiddenWordLength))
+	{
+		std::cin.clear();
+		ResetIOBuffer();
+	}
+	BCGame.SetHiddenWordLength(HiddenWordLength);
+	ResetIOBuffer();
 }
 
 bool AskToPlayAgain()
 {
-	std::cout << "Do you want to play again with the same hidden word? (y/n)\n\n";
+	std::cout << "Do you want to play again? (y/n)\n\n";
 	FText Response = "";
 	std::getline(std::cin, Response);
 	return (Response[0] == 'y') || (Response[0] == 'Y');
@@ -151,4 +172,10 @@ void PrintOutro()
 	{
 		std::cout << "Sorry you're out of turns. Better Luck next time!\n";
 	}
+}
+
+void ResetIOBuffer()
+{
+	std::cin.ignore(INT_MAX, '\n');
+	std::cout << std::endl;
 }

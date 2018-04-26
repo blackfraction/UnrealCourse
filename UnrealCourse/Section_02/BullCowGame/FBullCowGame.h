@@ -1,6 +1,11 @@
+/*
+	This file contains function declarations for the FBullCowGame Class.
+*/
+
 #pragma once
 #include <string>
 
+// to make syntax Unreal friendly
 using FString = std::string;
 using int32 = int;
 
@@ -31,14 +36,13 @@ public:
 	int32 GetHiddenWordLength() const;
 	
 	void SetDifficulty(int32);
-	
+	void SetHiddenWordLength(int32);
+
 	bool IsGameWon() const;
 	EGuessStatus CheckGuessValidity(FString) const;
-
-	void Reset(); //TODO make a richer return value.
-
-	// counts bulls and cows and increases try number assuming valid guess.
 	FBullCowCount SubmitValidGuess(FString);
+
+	void Reset();	
 	
 
 
@@ -46,6 +50,7 @@ private:
 	// see constructor for initialisation
 	int32 MyCurrentTry;
 	int32 MyDifficulty;
+	int32 MyHiddenWordLength;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 	
