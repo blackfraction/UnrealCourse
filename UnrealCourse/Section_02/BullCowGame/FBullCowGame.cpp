@@ -19,7 +19,7 @@ bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
 int32 FBullCowGame::GetMaxTries() const
 {
-	TMAP<int32, int32> WordLengthToMaxTries{ {3,(4-MyDifficulty)}, {4,(6 - MyDifficulty)}, {5,(7 - MyDifficulty)}, {6,(8 - MyDifficulty)}, {7,(9 - MyDifficulty)} };
+	TMAP<int32, int32> WordLengthToMaxTries{ {3,(5-MyDifficulty)}, {4,(8 - MyDifficulty)}, {5,(11 - MyDifficulty)}, {6,(16 - MyDifficulty)}, {7,(21 - MyDifficulty)} };
 	return WordLengthToMaxTries[MyHiddenWord.length()];
 }
 

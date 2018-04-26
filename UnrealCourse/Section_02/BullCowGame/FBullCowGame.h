@@ -31,7 +31,7 @@ public:
 	int32 GetHiddenWordLength() const;
 	
 	void SetDifficulty(int32);
-
+	
 	bool IsGameWon() const;
 	EGuessStatus CheckGuessValidity(FString) const;
 
