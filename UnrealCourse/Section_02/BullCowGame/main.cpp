@@ -25,7 +25,7 @@ FText GetValidGuess();
 bool AskToPlayAgain();
 void ResetIOBuffer();
 
-// instantiate a new game, which we re-use across plays
+// create a new game instance, which we re-use across plays
 FBullCowGame BCGame;
 
 // application entry point
