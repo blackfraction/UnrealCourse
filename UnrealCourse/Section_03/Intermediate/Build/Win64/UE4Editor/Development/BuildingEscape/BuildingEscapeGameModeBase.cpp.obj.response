@@ -23,9 +23,9 @@
 /wd4838
 /w44668
 /I "D:\Program Files\Epic Games\UE_4.15\Engine\Source"
-/I C:\Repo\UnrealCourse\Section_03\BuildingEscape\Source
-/I C:\Repo\UnrealCourse\Section_03\BuildingEscape\Intermediate\Build\Win64\UE4Editor\Inc\BuildingEscape
-/I C:\Repo\UnrealCourse\Section_03\BuildingEscape\Source\BuildingEscape
+/I C:\Repo\UnrealCourse\UnrealCourse\Section_03\Source
+/I C:\Repo\UnrealCourse\UnrealCourse\Section_03\Intermediate\Build\Win64\UE4Editor\Inc\BuildingEscape
+/I C:\Repo\UnrealCourse\UnrealCourse\Section_03\Source\BuildingEscape
 /I "D:\Program Files\Epic Games\UE_4.15\Engine\Source\Runtime\Core\Public"
 /I "D:\Program Files\Epic Games\UE_4.15\Engine\Source\Runtime\Core\Public\Internationalization"
 /I "D:\Program Files\Epic Games\UE_4.15\Engine\Source\Runtime\Core\Public\Async"
@@ -303,11 +303,11 @@
 /I "D:\Program Files\Epic Games\UE_4.15\Engine\Source\Editor\Kismet"
 /I "D:\Program Files\Epic Games\UE_4.15\Engine\Source\Runtime\NetworkReplayStreaming\NetworkReplayStreaming\Public"
 /I "D:\Program Files\Epic Games\UE_4.15\Engine\Source\Runtime\NetworkReplayStreaming\NetworkReplayStreaming"
-/FI"C:\Repo\UnrealCourse\Section_03\BuildingEscape\Source\BuildingEscape\BuildingEscape.h"
-/Yu"C:\Repo\UnrealCourse\Section_03\BuildingEscape\Source\BuildingEscape\BuildingEscape.h"
-/Fp"C:\Repo\UnrealCourse\Section_03\BuildingEscape\Intermediate\Build\Win64\UE4Editor\Development\BuildingEscape\PCH.BuildingEscape.h.pch"
-"C:\Repo\UnrealCourse\Section_03\BuildingEscape\Source\BuildingEscape\BuildingEscapeGameModeBase.cpp"
-/Fo"C:\Repo\UnrealCourse\Section_03\BuildingEscape\Intermediate\Build\Win64\UE4Editor\Development\BuildingEscape\BuildingEscapeGameModeBase.cpp.obj"
+/FI"C:\Repo\UnrealCourse\UnrealCourse\Section_03\Source\BuildingEscape\BuildingEscape.h"
+/Yu"C:\Repo\UnrealCourse\UnrealCourse\Section_03\Source\BuildingEscape\BuildingEscape.h"
+/Fp"C:\Repo\UnrealCourse\UnrealCourse\Section_03\Intermediate\Build\Win64\UE4Editor\Development\BuildingEscape\PCH.BuildingEscape.h.pch"
+"C:\Repo\UnrealCourse\UnrealCourse\Section_03\Source\BuildingEscape\BuildingEscapeGameModeBase.cpp"
+/Fo"C:\Repo\UnrealCourse\UnrealCourse\Section_03\Intermediate\Build\Win64\UE4Editor\Development\BuildingEscape\BuildingEscapeGameModeBase.cpp.obj"
 /TP
 /GR-
 /W4

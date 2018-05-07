@@ -1,3 +1,3 @@
-C:\Repo\UnrealCourse\Section_03\BuildingEscape\Source\BuildingEscape\BuildingEscape.Build.cs
-C:\Repo\UnrealCourse\Section_03\BuildingEscape\Source\BuildingEscape.Target.cs
-C:\Repo\UnrealCourse\Section_03\BuildingEscape\Source\BuildingEscapeEditor.Target.cs
+C:\Repo\UnrealCourse\UnrealCourse\Section_03\Source\BuildingEscape\BuildingEscape.Build.cs
+C:\Repo\UnrealCourse\UnrealCourse\Section_03\Source\BuildingEscape.Target.cs
+C:\Repo\UnrealCourse\UnrealCourse\Section_03\Source\BuildingEscapeEditor.Target.cs
