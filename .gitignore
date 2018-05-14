@@ -11,6 +11,11 @@
 *.userprefs
 
 # Build results
+[Bb]uild/
+[Bb]inaries/
+[Dd]erived[Dd]ata[Dd]ache/
+[Ii]ntermediate/
+[Ss]aved/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
