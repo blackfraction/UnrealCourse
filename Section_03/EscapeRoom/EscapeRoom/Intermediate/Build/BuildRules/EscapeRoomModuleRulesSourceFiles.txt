@@ -1,3 +1,0 @@
-C:\Repo\UnrealCourse\Section_03\EscapeRoom\EscapeRoom\Source\EscapeRoom\EscapeRoom.Build.cs
-C:\Repo\UnrealCourse\Section_03\EscapeRoom\EscapeRoom\Source\EscapeRoom.Target.cs
-C:\Repo\UnrealCourse\Section_03\EscapeRoom\EscapeRoom\Source\EscapeRoomEditor.Target.cs
