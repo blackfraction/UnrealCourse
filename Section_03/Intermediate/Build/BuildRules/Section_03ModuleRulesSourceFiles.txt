@@ -1,3 +1,0 @@
-C:\Repo\UnrealCourse\Section_03\Source\Section_03\Section_03.Build.cs
-C:\Repo\UnrealCourse\Section_03\Source\Section_03.Target.cs
-C:\Repo\UnrealCourse\Section_03\Source\Section_03Editor.Target.cs
