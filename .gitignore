@@ -261,4 +261,5 @@ __pycache__/
 *.pyc
 
 # Starter Content
-Section_03/Content/StarterContent
+Section_03/Content/StarterContent/Textures
+Section_03/Content/StarterContent/HDRI
