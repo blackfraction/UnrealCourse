@@ -14,16 +14,24 @@ class ESCAPEROOM_API UGrabber : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UGrabber();
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	// Return hit for first physics body in reach
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	// Find attached components
+	void FindPhysicsHandleComponent();
+	void SetupInputComponent();
+
+	FHitResult GetFirstPhysicsBodyInReach() const;
 
 private:
 	// Player reach
@@ -31,7 +39,8 @@ private:
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
-	
-	// Ray-cast and grab what's in reach
+
+	// Ray-cast and grab what's in reach, and released
 	void Grab();
+	void Release();
 };
