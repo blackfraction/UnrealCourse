@@ -33,6 +33,10 @@ protected:
 
 	FHitResult GetFirstPhysicsBodyInReach() const;
 
+	FVector GetReachLineStart() const;
+
+	FVector GetReachLineEnd() const;
+
 private:
 	// Player reach
 	float Reach = 100.0f;
